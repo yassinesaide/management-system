@@ -1,7 +1,82 @@
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
 import TableSearch from '@/components/TableSearch'
+import { role, teachersData } from '@/lib/data'
+import Link from 'next/link'
 import React from 'react'
+
+
+type Teacher ={
+  id:number;
+  teacherId:number;
+  name:string;
+  email?:string;
+  photo:string;
+  phone:string;
+  subjects:string[];
+  classes :string[];
+  address:string;
+}
+
+const colums=[
+  {
+    header:"info" , accessor:"info"
+  },
+  {
+    header:"TeacherID" , accessor:"teacherID" , className:"hidden md:table-cell"
+  },
+  {
+    header:"Subjects" , accessor:"subjects" , className:"hidden md:table-cell"
+  },
+  {
+    header:"Classes" , accessor:"classes" , className:"hidden md:table-cell"
+  },
+  {
+    header:"Phone" , accessor:"phone" , className:"hidden md:table-cell"
+  },
+  {
+    header:"Adress" , accessor:"adress" , className:"hidden md:table-cell"
+  },
+  {
+    header:"Actions" , accessor:"actions" 
+  },
+]
+  const renderRow =(item:Teacher)=>(
+    <tr key={item.id} className='border-b border-gray-200 even:bg-slate-200  text-sm hover:bg-purple-200'>
+    <td className='flex items-center gap-4 p-4 '>
+      <img src={item.photo} alt="" width={40} height={40}  className='md:hidden xl:block w-10 h-10 rounded-full object-cover' />
+      <div className='flex flex-col'>
+      <h3 className='font-semibold'>{item.name}</h3>
+      <p className='text-xs text-gray-500'>{item?.email}</p>
+    </div>
+    </td>
+    <td className='hidden md:table-cell'>{item.teacherId}</td>
+    <td className='hidden md:table-cell'>{item.subjects.join(",")}</td>
+    <td className='hidden md:table-cell'>{item.classes.join(",") }</td>
+    <td className='hidden md:table-cell'>{item.phone}</td>
+    <td className='hidden md:table-cell'>{item.address}</td>
+    <td className=''>
+    <div className='flex items-center gap-2'>
+    <Link href={`/list/teachers/${item.id}`}>
+        <button className='w-7 h-7 flex items-center justify-center rounded-full  bg-sky-400'>
+          <img src="/view.png" alt="" width={16}  height={16}/>
+        </button>
+   
+      </Link>
+      <button className='w-7 h-7 flex items-center justify-center rounded-full  bg-purple-600'>
+       <img src="/delete.png" alt="" width={16}  height={16}/>
+     </button>
+     {/* {role ==="admin"&& (
+      
+     )} */}
+    </div>
+    </td>
+  </tr>
+  )
+   
+  
+
+
 
 const page = () => {
   return (
@@ -24,7 +99,7 @@ const page = () => {
         </div>
       </div>
       <div className=''>
-        <Table/>
+        <Table colums={colums} renderRow={renderRow} data={teachersData}/>
       </div>
         <Pagination/>
     </div>
