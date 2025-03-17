@@ -1,65 +1,112 @@
-"use client"
-import React from 'react'
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from 'recharts';
+"use client";
+import React from "react";
+import {
+  RadialBarChart,
+  RadialBar,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   {
-    name: 'Total',
+    name: "Total",
     count: 106,
-    fill: 'white',
+    fill: "white",
   },
   {
-    name: 'Girls',
+    name: "Girls",
     count: 53,
-    fill: 'yellow',
+    fill: "yellow",
   },
   {
-    name: 'Boys',
+    name: "Boys",
     count: 53,
-    fill: 'blue',
+    fill: "blue",
   },
-
 ];
 
-
-
-
-const CountChart = () => {
+const CountChart: React.FC = () => {
   return (
-    <div className='bg-white rounded-xl w-full h-full'>
-        {/* TITLE */}
-        <div className='flex justify-between items-center'>
-            <h1 className='text-lg font-semibold'>Students</h1>
-            <img src="/moreDark.png" alt="" width={20} height={20} />
+    <div className="bg-white p-6 rounded-lg shadow-md h-full">
+      <h3 className="text-xl font-semibold mb-4">Enrollment Statistics</h3>
+
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-blue-100 mb-3">
+            <span className="text-3xl font-bold text-blue-600">520</span>
+          </div>
+          <p className="text-gray-600 font-medium">Total Students</p>
         </div>
 
-        {/* CHART */}
-        <div className='relative w-full h-[75%]'>
-        <ResponsiveContainer>
-        <RadialBarChart cx="50%" cy="50%" innerRadius="40%" outerRadius="80%" barSize={32} data={data}>
-          <RadialBar
-            background
-            dataKey="count"
-          />
-        </RadialBarChart>
-      </ResponsiveContainer>
-      <img src="/maleFemale.png" alt=""  width={50} height={50} className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'/>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-gray-50 p-3 rounded-lg text-center">
+            <div className="text-xl font-bold text-indigo-600">52%</div>
+            <div className="text-xs text-gray-500">Male Students</div>
+          </div>
+          <div className="bg-gray-50 p-3 rounded-lg text-center">
+            <div className="text-xl font-bold text-pink-600">48%</div>
+            <div className="text-xs text-gray-500">Female Students</div>
+          </div>
         </div>
-        {/* BUTTOM */}
-        <div className=' flex justify-center gap-16'>
-           <div className='flex flex-col gap-1'>
-            <div className='w-5 h-5 bg-sky-500 rounded-full'/>
-            <h1 className='font-bold '>1.234</h1>
-            <h2 className='text-xs text-gray-400'>Boys 55%</h2>
-            </div>  
-            <div className='flex flex-col gap-1'>
-            <div className='w-5 h-5 bg-yellow-500 rounded-full'/>
-            <h1 className='font-bold '>1.234</h1>
-            <h2 className='text-xs text-gray-400'>Girls 45%</h2>
-            </div>  
-            </div> 
+
+        <div>
+          <h4 className="text-sm font-medium text-gray-600 mb-2">
+            Grade Distribution
+          </h4>
+          <div className="space-y-2">
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span>Grade 9</span>
+                <span>120 Students</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div
+                  className="bg-green-500 h-1.5 rounded-full"
+                  style={{ width: "23%" }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span>Grade 10</span>
+                <span>140 Students</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div
+                  className="bg-blue-500 h-1.5 rounded-full"
+                  style={{ width: "27%" }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span>Grade 11</span>
+                <span>130 Students</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div
+                  className="bg-purple-500 h-1.5 rounded-full"
+                  style={{ width: "25%" }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between text-xs mb-1">
+                <span>Grade 12</span>
+                <span>130 Students</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div
+                  className="bg-yellow-500 h-1.5 rounded-full"
+                  style={{ width: "25%" }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CountChart
+export default CountChart;

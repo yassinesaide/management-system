@@ -1,56 +1,39 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
-import { logout } from "@/store/userSlice";
 import { User } from "@/store/userSlice";
 
-export default function DashboardLayout({
+export default function StudentDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const reduxState = useAppSelector((state) => state.auth);
-
-  // Create local state to prevent hydration errors
   const [isMounted, setIsMounted] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     // Mark component as mounted (client-side only)
     setIsMounted(true);
 
-    // Update state from Redux (client-side only)
-    if (reduxState.user) {
-      setUser(reduxState.user);
-      setIsAuthenticated(reduxState.isAuthenticated);
-    } else {
-      // Try to get from localStorage directly as a fallback
-      try {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          setUser(parsedUser);
-          setIsAuthenticated(true);
-        }
-      } catch (err) {
-        console.error("Error reading localStorage:", err);
+    // Try to get user from localStorage directly
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        console.log(
+          "Student layout: User loaded from localStorage:",
+          parsedUser
+        );
       }
+    } catch (err) {
+      console.error("Error reading localStorage:", err);
     }
-  }, [reduxState]);
-
-  const handleLogout = () => {
-    dispatch(logout());
-    window.location.href = "/login";
-  };
+  }, []);
 
   // Simple loading state during server-side rendering
   if (!isMounted) {
-    return <div className="p-8">Loading dashboard...</div>;
+    return <div className="p-8">Loading student dashboard layout...</div>;
   }
 
   // Simple layout with minimal logic
@@ -59,7 +42,7 @@ export default function DashboardLayout({
       {/* Sidebar */}
       <div className="w-64 bg-gray-800 text-white">
         <div className="p-4">
-          <h2 className="text-xl font-bold">School Management</h2>
+          <h2 className="text-xl font-bold">Student Portal</h2>
           {user && (
             <>
               <p className="text-sm text-gray-400">
@@ -77,6 +60,12 @@ export default function DashboardLayout({
               className="block text-white text-sm underline hover:text-blue-200 mb-1"
             >
               Student Dashboard
+            </a>
+            <a
+              href="/student-page"
+              className="block text-white text-sm underline hover:text-blue-200 mb-1"
+            >
+              Standalone Page
             </a>
             <a
               href="/debug"
@@ -99,6 +88,30 @@ export default function DashboardLayout({
             </li>
             <li>
               <a
+                href="/dashboard/student/schedule"
+                className="block py-2 px-4 rounded hover:bg-gray-700"
+              >
+                My Schedule
+              </a>
+            </li>
+            <li>
+              <a
+                href="/dashboard/student/assignments"
+                className="block py-2 px-4 rounded hover:bg-gray-700"
+              >
+                Assignments
+              </a>
+            </li>
+            <li>
+              <a
+                href="/dashboard/student/grades"
+                className="block py-2 px-4 rounded hover:bg-gray-700"
+              >
+                Grades
+              </a>
+            </li>
+            <li>
+              <a
                 href="/dashboard/profile"
                 className="block py-2 px-4 rounded hover:bg-gray-700"
               >
@@ -106,12 +119,12 @@ export default function DashboardLayout({
               </a>
             </li>
             <li>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left py-2 px-4 rounded hover:bg-gray-700"
+              <a
+                href="/login"
+                className="block py-2 px-4 rounded hover:bg-gray-700"
               >
                 Logout
-              </button>
+              </a>
             </li>
           </ul>
         </nav>
@@ -121,7 +134,9 @@ export default function DashboardLayout({
       <div className="flex-1 bg-gray-100">
         <header className="bg-white shadow">
           <div className="mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Student Dashboard
+            </h1>
           </div>
         </header>
         <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

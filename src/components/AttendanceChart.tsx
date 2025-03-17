@@ -1,63 +1,94 @@
-"use client"    
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+"use client";
+import React from "react";
 
-const data = [
-  {
-    name: 'Mon',
-    present: 500,
-    absent: 300,
-  },
-  {
-    name: 'Tue',
-    present: 320,
-    absent: 250,
-  },
-  {
-    name: ' Wed',
-    present: 490,
-    absent: 260,
-  },
-  {
-    name: 'Thru',
-    present: 330,
-    absent: 150,
-   
-  },
-  {
-    name: 'Fri ',
-    present: 550,
-    absent: 400,
-   
-  },
-];
-
-
-
-const AttendanceChart = () => {
+const AttendanceChart: React.FC = () => {
   return (
-    <div className='bg-white rounded-lg p-4 h-full'>
-        <div className='flex justify-between items-center'>
-            <h1 className='text-lg font-semibold'>Attendance</h1>
-            <img src="/moreDark.png" alt=""  width={20} height={20}/>
-        </div>
-        <ResponsiveContainer width="100%" height="90%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          barSize={20}
-        >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke='#ddd'/>
-          <XAxis dataKey="name" axisLine={false} tick={{fill:"#d1d5db"}} tickLine={false} />
-          <YAxis axisLine={false}  tick={{fill:"#d1d5db"}} tickLine={false} />
-          <Tooltip contentStyle={{borderRadius:"10px" , borderColor:"lightgray"}} />
-          <Legend align='left' verticalAlign='top' wrapperStyle={{paddingTop:"20px" , paddingBottom:"40px"}}  />
-          <Bar dataKey="present" fill="blue" legendType='circle' radius={[10 , 10 , 0 , 0]}  />
-          <Bar dataKey="absent" fill="yellow" legendType='circle' radius={[10 , 10 , 0 , 0]}   />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
+    <div className="bg-white p-6 rounded-lg shadow-md h-full">
+      <h3 className="text-xl font-semibold mb-4">Attendance Overview</h3>
 
-export default AttendanceChart
+      <div className="mt-4 space-y-4">
+        <div>
+          <div className="flex justify-between mb-1">
+            <span className="text-sm font-medium">Overall Attendance</span>
+            <span className="text-sm font-medium">92%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-green-600 h-2.5 rounded-full"
+              style={{ width: "92%" }}
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between mb-1">
+            <span className="text-sm font-medium">Class 10A</span>
+            <span className="text-sm font-medium">88%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-blue-600 h-2.5 rounded-full"
+              style={{ width: "88%" }}
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between mb-1">
+            <span className="text-sm font-medium">Class 9B</span>
+            <span className="text-sm font-medium">94%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-blue-600 h-2.5 rounded-full"
+              style={{ width: "94%" }}
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between mb-1">
+            <span className="text-sm font-medium">Class 8C</span>
+            <span className="text-sm font-medium">90%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-blue-600 h-2.5 rounded-full"
+              style={{ width: "90%" }}
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between mb-1">
+            <span className="text-sm font-medium">Class 7A</span>
+            <span className="text-sm font-medium">96%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-blue-600 h-2.5 rounded-full"
+              style={{ width: "96%" }}
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+        <div className="bg-green-50 p-3 rounded-lg">
+          <p className="font-bold text-green-600 text-xl">92%</p>
+          <p className="text-xs text-gray-500">Present</p>
+        </div>
+        <div className="bg-red-50 p-3 rounded-lg">
+          <p className="font-bold text-red-600 text-xl">5%</p>
+          <p className="text-xs text-gray-500">Absent</p>
+        </div>
+        <div className="bg-yellow-50 p-3 rounded-lg">
+          <p className="font-bold text-yellow-600 text-xl">3%</p>
+          <p className="text-xs text-gray-500">Late</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AttendanceChart;

@@ -1,28 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { User } from "@/store/userSlice";
 
-export default function StudentDashboard() {
-  // State for client-side rendering
+export default function StandaloneStudentPage() {
+  const [user, setUser] = useState<any>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Mark component as mounted
     setIsMounted(true);
     setIsLoading(true);
 
-    console.log("Student dashboard mounted");
-
-    // Try to get user from localStorage
     try {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
-        console.log("User loaded from localStorage:", parsedUser);
+        setUser(JSON.parse(storedUser));
       }
     } catch (err) {
       console.error("Error reading localStorage:", err);
@@ -31,32 +23,22 @@ export default function StudentDashboard() {
     }
   }, []);
 
-  // Simple loading state during server-side rendering
   if (!isMounted || isLoading) {
-    return <div className="p-8">Loading student dashboard...</div>;
+    return <div className="p-8">Loading...</div>;
   }
 
   return (
-    <div className="p-4">
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
+    <div className="p-8 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">
+        Student Dashboard (Standalone)
+      </h1>
 
-        {!user ? (
-          <div>
-            <p className="text-red-500">Not authenticated. Please log in.</p>
-            <a
-              href="/login"
-              className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Go to Login
-            </a>
-          </div>
-        ) : (
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold mb-4">User Information</h2>
+        {user ? (
           <div>
             <p className="mb-2">
-              <span className="font-semibold">
-                Welcome, {user.username || "Student"}!
-              </span>
+              <span className="font-semibold">Username:</span> {user.username}
             </p>
             <p className="mb-2">
               <span className="font-semibold">Role:</span> {user.role}
@@ -67,6 +49,16 @@ export default function StudentDashboard() {
             <p className="mb-2">
               <span className="font-semibold">Full Name:</span> {user.full_name}
             </p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-red-500">Not authenticated. Please log in.</p>
+            <a
+              href="/login"
+              className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Go to Login
+            </a>
           </div>
         )}
       </div>
@@ -102,6 +94,33 @@ export default function StudentDashboard() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-4">Navigation</h2>
+        <div className="space-y-2">
+          <a href="/" className="block text-blue-600 hover:underline">
+            Home
+          </a>
+          <a href="/login" className="block text-blue-600 hover:underline">
+            Login Page
+          </a>
+          <a href="/dashboard" className="block text-blue-600 hover:underline">
+            Main Dashboard
+          </a>
+          <a
+            href="/dashboard/student"
+            className="block text-blue-600 hover:underline"
+          >
+            Student Dashboard
+          </a>
+          <a href="/test" className="block text-blue-600 hover:underline">
+            Test Page
+          </a>
+          <a href="/debug" className="block text-blue-600 hover:underline">
+            Debug Page
+          </a>
         </div>
       </div>
     </div>

@@ -1,43 +1,50 @@
-import React from 'react'
+"use client";
 
-const Announcements = () => {
-  return (
-    <div className="bg-white p-4 rounded-md ">
-        <div className='flex items-center justify-between'>
-            <h1 className='text-xl font-semibold'>Announcements</h1>
-            <span className='text-xs text-gray-300'>View All</span>
-            </div> 
-            <div className='flex flex-col gap-4 mt-4'>
-            <div className='bg-sky-200 rounded-md p-4'>
-                <div className='flex items-center justify-between'>
-                    <h2 className='font-medium'>Lorem ipsum dolor sit amet.</h2>
-                    <span className='text-xs text-gray-300 bg-white rounded-md px-1 py-1'>2025/01/01</span>
-                </div>
-                <p className='text-sm text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, blanditiis?</p>
-            </div>
-            </div>
-            <div className='flex flex-col gap-4 mt-4'>
-            <div className='bg-purple-200 rounded-md p-4'>
-                <div className='flex items-center justify-between'>
-                    <h2 className='font-medium'>Lorem ipsum dolor sit amet.</h2>
-                    <span className='text-xs text-gray-300 bg-white rounded-md px-1 py-1'>2025/01/01</span>
-                </div>
-                <p className='text-sm text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, blanditiis?</p>
+import React from "react";
 
-            </div>
-            </div>
-            <div className='flex flex-col gap-4 mt-4'>
-            <div className='bg-yellow-200 rounded-md p-4'>
-                <div className='flex items-center justify-between'>
-                    <h2 className='font-medium'>Lorem ipsum dolor sit amet.</h2>
-                    <span className='text-xs text-gray-300 bg-white rounded-md px-1 py-1'>2025/01/01</span>
-                </div>
-                <p className='text-sm text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, blanditiis?</p>
+const Announcements: React.FC = () => {
+  try {
+    return (
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h3 className="text-xl font-semibold mb-4">Announcements</h3>
+        <div className="space-y-4">
+          <div className="border-b pb-3">
+            <h4 className="font-medium text-lg">Parent-Teacher Meeting</h4>
+            <p className="text-gray-600 text-sm">
+              The parent-teacher meeting is scheduled for next Friday. Please
+              make sure to attend.
+            </p>
+            <p className="text-gray-500 text-xs mt-1">Posted 2 days ago</p>
+          </div>
+          <div className="border-b pb-3">
+            <h4 className="font-medium text-lg">Final Exam Schedule</h4>
+            <p className="text-gray-600 text-sm">
+              The final exam schedule has been published. Please check the
+              academic calendar.
+            </p>
+            <p className="text-gray-500 text-xs mt-1">Posted 1 week ago</p>
+          </div>
+          <div>
+            <h4 className="font-medium text-lg">
+              School Closed - Teacher Training
+            </h4>
+            <p className="text-gray-600 text-sm">
+              The school will be closed on Monday for teacher training.
+            </p>
+            <p className="text-gray-500 text-xs mt-1">Posted 2 weeks ago</p>
+          </div>
+        </div>
+      </div>
+    );
+  } catch (error) {
+    console.error("Error rendering Announcements component:", error);
+    return (
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h3 className="text-xl font-semibold mb-4">Announcements</h3>
+        <p className="text-red-500">Unable to load announcements</p>
+      </div>
+    );
+  }
+};
 
-            </div>
-            </div>
-    </div>
-  )
-}
-
-export default Announcements 
+export default Announcements;

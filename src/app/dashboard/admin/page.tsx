@@ -1,41 +1,60 @@
-import Announcements from '@/components/Announcements'
-import AttendanceChart from '@/components/AttendanceChart'
-import CountChart from '@/components/CountChart'
-import EventCalender from '@/components/EventCalender'
-import FinanceChart from '@/components/FinanceChart'
-import UserCard from '@/components/UserCard'
-import React from 'react'
+import React from "react";
+import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import Announcements from "@/components/Announcements";
+import AttendanceChart from "@/components/AttendanceChart";
+import CountChart from "@/components/CountChart";
+import EventCalendar from "@/components/EventCalender";
+import FinanceChart from "@/components/FinanceChart";
+import UserCard from "@/components/UserCard";
 
-const page = () => {
+export default function AdminDashboard() {
+  // Verify user is admin
+  const cookieStore = cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const user = token ? verifyToken(token) : null;
+
+  // If not admin, redirect to dashboard
+  if (!user || user.role !== "admin") {
+    redirect("/dashboard");
+  }
+
   return (
-    <div className='flex  gap-4 p-4  flex-col md:flex-row'>
-      {/* LEFT */}
-      <div className='w-full lg:w-2/3 flex flex-col gap-8'>
-        {/* {/UserCard} */}
-        <div className='flex gap-4 justify-between flex-wrap'>
-          <UserCard type='student'/>
-          <UserCard type='teacher'/>
-          <UserCard type='parent'/>
-          <UserCard type='staff'/>
-        </div>
-        <div className='flex gap-4 flex-col lg:flex-row'>
-          <div className='w-full lg:w-1/3 h-[450px]'>
-            <CountChart/>
-          </div>
-          <div className='w-full lg:w-2/3 h-[450px]'>
-         <AttendanceChart/> 
-        </div>
-        </div>
-        <div className='w-full h-[500px]'><FinanceChart/></div>
-
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold text-gray-800">
+          Admin Dashboard
+        </h2>
+        <p className="text-gray-600">Manage your school system</p>
       </div>
-      {/* RIGHT */}
-      <div className='w-full lg:w-1/3 flex flex-col gap-8'>
-        <EventCalender/>
-        <Announcements/>
+
+      {/* User Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <UserCard type="student" />
+        <UserCard type="teacher" />
+        <UserCard type="parent" />
+        <UserCard type="staff" />
+      </div>
+
+      {/* Charts and Statistics */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="lg:col-span-1">
+          <CountChart />
+        </div>
+        <div className="lg:col-span-2">
+          <AttendanceChart />
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <FinanceChart />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Announcements />
+        <EventCalendar />
       </div>
     </div>
-  )
+  );
 }
-
-export default page

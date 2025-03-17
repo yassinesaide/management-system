@@ -3,23 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env HOST=0.0.0.0 PORT=3000 next dev",
+    "dev": "cross-env HOST=0.0.0.0 PORT=3001 next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup": "node setup.js",
+    "create-admin": "ts-node src/scripts/create-admin.ts"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
     "@types/react-big-calendar": "^1.8.9",
+    "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
+    "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
+    "mysql2": "^3.9.5",
     "next": "14.2.5",
     "react": "^18",
     "react-big-calendar": "^1.13.4",
     "react-calendar": "^5.0.0",
     "react-dom": "^18",
-    "recharts": "^2.12.7"
+    "react-redux": "^9.2.0",
+    "recharts": "^2.12.7",
+    "sharp": "^0.33.5",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

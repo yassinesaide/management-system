@@ -1061,3 +1061,67 @@ export const calendarEvents = [
     end: new Date(2024, 7, 16, 14, 45),
   },
 ];
+
+// Calendar events data
+export const calendarEventsData = [
+  {
+    id: 1,
+    title: 'Math Class',
+    start: new Date(2025, 3, 15, 9, 0, 0),
+    end: new Date(2025, 3, 15, 10, 30, 0),
+  },
+  {
+    id: 2,
+    title: 'Physics Lab',
+    start: new Date(2025, 3, 15, 11, 0, 0),
+    end: new Date(2025, 3, 15, 12, 30, 0),
+  },
+  {
+    id: 3,
+    title: 'History Class',
+    start: new Date(2025, 3, 16, 9, 0, 0),
+    end: new Date(2025, 3, 16, 10, 30, 0),
+  },
+  {
+    id: 4,
+    title: 'English Literature',
+    start: new Date(2025, 3, 16, 11, 0, 0),
+    end: new Date(2025, 3, 16, 12, 30, 0),
+  },
+  {
+    id: 5,
+    title: 'Chemistry Lab',
+    start: new Date(2025, 3, 17, 9, 0, 0),
+    end: new Date(2025, 3, 17, 10, 30, 0),
+  },
+  {
+    id: 6,
+    title: 'Biology Class',
+    start: new Date(2025, 3, 17, 11, 0, 0),
+    end: new Date(2025, 3, 17, 12, 30, 0),
+  },
+  {
+    id: 7,
+    title: 'Computer Science',
+    start: new Date(2025, 3, 18, 9, 0, 0),
+    end: new Date(2025, 3, 18, 10, 30, 0),
+  },
+  {
+    id: 8,
+    title: 'Art Class',
+    start: new Date(2025, 3, 18, 11, 0, 0),
+    end: new Date(2025, 3, 18, 12, 30, 0),
+  },
+  {
+    id: 9,
+    title: 'Physical Education',
+    start: new Date(2025, 3, 19, 9, 0, 0),
+    end: new Date(2025, 3, 19, 10, 30, 0),
+  },
+  {
+    id: 10,
+    title: 'Music Class',
+    start: new Date(2025, 3, 19, 11, 0, 0),
+    end: new Date(2025, 3, 19, 12, 30, 0),
+  }
+];

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ReduxProvider } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: " School Management Dashboard",
-  description: "Next.js School Management System",
+  title: "School Management System",
+  description: "A complete school management solution",
 };
 
 export default function RootLayout({
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }
